@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pck.rcclient.controller.screen.HomeScreenController">
+    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="800.0" text="Remote Control Client" textAlignment="CENTER">
+        <font>
+          <Font name="System Bold" size="36.0" />
+        </font>
+    </Label>
+    <TabPane fx:id="tabPane" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="tabWinProcess" text="Process">
+            <AnchorPane>
+                <TextField fx:id="tfProcessName" layoutX="20.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter process name">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="btnStartProcess" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnStartProcessClick" prefHeight="30.0" prefWidth="120.0" text="Start Process">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="tfPID" layoutX="430.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter PID">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="btnKillProcess" layoutX="650.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnKillProcessClick" prefHeight="30.0" prefWidth="120.0" text="Kill Process">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="tvWinProcess" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0">
+                    <columns>
+                        <TableColumn fx:id="colNoWinProcess" prefWidth="75.0" resizable="false" text="#" />
+                        <TableColumn fx:id="colImageNameWinProcess" prefWidth="150.0" resizable="false" text="Image Name" />
+                        <TableColumn fx:id="colPIDWinProcess" prefWidth="100.0" resizable="false" text="PID" />
+                        <TableColumn fx:id="colSessionNameWinProcess" prefWidth="150.0" resizable="false" text="Session Name" />
+                        <TableColumn fx:id="colSessionIDWinProcess" prefWidth="100.0" resizable="false" text="Session ID" />
+                        <TableColumn fx:id="colMemUsageWinProcess" prefWidth="100.0" resizable="false" text="Mem Usage" />
+                        <TableColumn fx:id="colBtnWinProcess" prefWidth="75.0" resizable="false" />
+                    </columns>
+                </TableView>
+            </AnchorPane>
+        </Tab>
+        <Tab fx:id="tabWinApp" text="Application">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <TextField fx:id="tfAppNameForStart" layoutX="20.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter application name" text="C:\Users\Phat\Downloads\Programs\AnyDesk.exe">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="btnStartApp" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnStartAppClick" prefHeight="30.0" prefWidth="120.0" text="Start App">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="tfAppNameForStop" layoutX="430.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter application name">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="btnStopApp" layoutX="650.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnStopAppClick" prefHeight="30.0" prefWidth="120.0" text="Stop App">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="tvWinApp" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0">
+                    <columns>
+                        <TableColumn fx:id="colNoWinApp" prefWidth="50.0" resizable="false" text="#" />
+                        <TableColumn fx:id="colImageNameWinApp" prefWidth="300.0" resizable="false" text="Image Name" />
+                        <TableColumn fx:id="colPIDWinApp" prefWidth="50.0" resizable="false" text="PID" />
+                        <TableColumn fx:id="colMemUsageWinApp" prefWidth="75.0" resizable="false" text="Mem Usage" />
+                        <TableColumn fx:id="colPackageNameWinApp" prefWidth="200.0" text="Package Name" />
+                        <TableColumn fx:id="colBtnWinApp" prefWidth="75.0" resizable="false" />
+                    </columns>
+                </TableView>
+            </AnchorPane>
+        </Tab>
+        <Tab fx:id="tabKeyStroke" text="Key Stroke">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <Button fx:id="btnKeyStroke" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnKeyStrokeClick" prefHeight="30.0" prefWidth="120.0" text="Hook">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <tooltip>
+                        <Tooltip text="Start listen key press" />
+                    </tooltip>
+                </Button>
+                <Label fx:id="lblHookNoti" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" text="App is now hooking !!!" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="taHookedKeys" editable="false" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0" wrapText="true" />
+
+            </AnchorPane>
+        </Tab>
+        <Tab fx:id="tabScreenshot" text="Screenshot">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <Button fx:id="btnTakeScreenshot" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnTakeScreenshotClick" prefHeight="30.0" prefWidth="150.0" text="Take screenshot">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                    <tooltip>
+                        <Tooltip text="Start listen key press" />
+                    </tooltip>
+                </Button>
+                <Pane layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0">
+                    <ImageView fx:id="ivScreenshotImage" fitHeight="400.0" fitWidth="760.0" pickOnBounds="true" preserveRatio="true" />
+                </Pane>
+            </AnchorPane>
+        </Tab>
+    </TabPane>
+</AnchorPane>

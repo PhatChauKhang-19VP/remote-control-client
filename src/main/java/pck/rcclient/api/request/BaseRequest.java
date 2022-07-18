@@ -11,6 +11,10 @@ public abstract class BaseRequest {
         return type;
     }
 
+    public void setType(REQUEST_TYPE type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "BaseReq{" +
