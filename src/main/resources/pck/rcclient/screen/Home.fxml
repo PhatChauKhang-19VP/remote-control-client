@@ -45,20 +45,18 @@
                 </Button>
                 <TableView fx:id="tvWinProcess" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0">
                     <columns>
-                        <TableColumn fx:id="colNoWinProcess" prefWidth="75.0" resizable="false" text="#" />
-                        <TableColumn fx:id="colImageNameWinProcess" prefWidth="150.0" resizable="false" text="Image Name" />
-                        <TableColumn fx:id="colPIDWinProcess" prefWidth="100.0" resizable="false" text="PID" />
-                        <TableColumn fx:id="colSessionNameWinProcess" prefWidth="150.0" resizable="false" text="Session Name" />
-                        <TableColumn fx:id="colSessionIDWinProcess" prefWidth="100.0" resizable="false" text="Session ID" />
-                        <TableColumn fx:id="colMemUsageWinProcess" prefWidth="100.0" resizable="false" text="Mem Usage" />
-                        <TableColumn fx:id="colBtnWinProcess" prefWidth="75.0" resizable="false" />
+                        <TableColumn fx:id="colProcessNo" prefWidth="75.0" resizable="false" text="#" />
+                        <TableColumn fx:id="colProcessName" prefWidth="240.0" resizable="false" text="Name" />
+                        <TableColumn fx:id="colProcessPID" prefWidth="150.0" resizable="false" text="PID" />
+                        <TableColumn fx:id="colProcessMemUsage" prefWidth="150.0" resizable="false" text="Mem Usage" />
+                        <TableColumn fx:id="colProcessBtn" prefWidth="75.0" resizable="false" />
                     </columns>
                 </TableView>
             </AnchorPane>
         </Tab>
         <Tab fx:id="tabWinApp" text="Application">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                <TextField fx:id="tfAppNameForStart" layoutX="20.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter application name" text="C:\Users\Phat\Downloads\Programs\AnyDesk.exe">
+                <TextField fx:id="tfAppNameForStart" layoutX="20.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter application name">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -68,7 +66,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <TextField fx:id="tfAppNameForStop" layoutX="430.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter application name">
+                <TextField fx:id="tfAppNameForStop" layoutX="430.0" layoutY="10.0" prefHeight="30.0" prefWidth="200.0" promptText="Enter application PID">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -80,12 +78,11 @@
                 </Button>
                 <TableView fx:id="tvWinApp" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0">
                     <columns>
-                        <TableColumn fx:id="colNoWinApp" prefWidth="50.0" resizable="false" text="#" />
-                        <TableColumn fx:id="colImageNameWinApp" prefWidth="300.0" resizable="false" text="Image Name" />
-                        <TableColumn fx:id="colPIDWinApp" prefWidth="50.0" resizable="false" text="PID" />
-                        <TableColumn fx:id="colMemUsageWinApp" prefWidth="75.0" resizable="false" text="Mem Usage" />
-                        <TableColumn fx:id="colPackageNameWinApp" prefWidth="200.0" text="Package Name" />
-                        <TableColumn fx:id="colBtnWinApp" prefWidth="75.0" resizable="false" />
+                        <TableColumn fx:id="colAppNo" prefWidth="75.0" resizable="false" text="#" />
+                        <TableColumn fx:id="colAppName" prefWidth="250.0" resizable="false" text="Application Name" />
+                        <TableColumn fx:id="colAppPID" prefWidth="150.0" resizable="false" text="PID" />
+                        <TableColumn fx:id="colAppMemUsage" prefWidth="150.0" resizable="false" text="Mem Usage" />
+                        <TableColumn fx:id="colAppBtn" prefWidth="75.0" resizable="false" />
                     </columns>
                 </TableView>
             </AnchorPane>

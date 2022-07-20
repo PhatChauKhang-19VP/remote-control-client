@@ -92,7 +92,7 @@ public class API {
 
                     dataOut.writeUTF(req.getType().name());
 
-                    dataOut.writeUTF(req.getAppName());
+                    dataOut.writeInt(req.getPid());
 
                     return true;
                 }
@@ -126,13 +126,11 @@ public class API {
                     int numberProcess = dataIn.readInt();
                     ArrayList<WinProcess> winProcesses = new ArrayList<>();
                     for (int i = 0; i < numberProcess; i++) {
-                        String imageName = dataIn.readUTF();
+                        String name = dataIn.readUTF();
                         int pid = dataIn.readInt();
-                        String sessionName = dataIn.readUTF();
-                        int sessionId = dataIn.readInt();
-                        String memUsage = dataIn.readUTF();
+                        double memUsage = dataIn.readDouble();
 
-                        winProcesses.add(new WinProcess(imageName, pid, sessionName, sessionId, memUsage));
+                        winProcesses.add(new WinProcess(name, pid, memUsage));
                     }
 
                     return new GetListRunningProcessResponse(responseStatus, msg, requestType, winProcesses);
@@ -145,12 +143,11 @@ public class API {
                     int numberApps = dataIn.readInt();
                     ArrayList<WinApp> winApps = new ArrayList<>();
                     for (int i = 0; i < numberApps; i++) {
-                        String imageName = dataIn.readUTF();
+                        String name = dataIn.readUTF();
                         int pid = dataIn.readInt();
-                        String memUsage = dataIn.readUTF();
-                        String packageName = dataIn.readUTF();
+                        double memUsage = dataIn.readDouble();
 
-                        winApps.add(new WinApp(imageName, pid, memUsage, packageName));
+                        winApps.add(new WinApp(name, pid, memUsage));
                     }
 
                     return new GetListRunningAppResponse(responseStatus, msg, requestType, winApps);

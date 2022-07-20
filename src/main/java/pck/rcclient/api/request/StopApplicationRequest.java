@@ -1,26 +1,26 @@
 package pck.rcclient.api.request;
 
 public class StopApplicationRequest extends BaseRequest {
-    private String appName;
+    private int pid;
 
-    public StopApplicationRequest(String nameApp) {
+    public StopApplicationRequest(int nameApp) {
         super(REQUEST_TYPE.STOP_APP);
-        this.appName = nameApp;
+        this.pid = nameApp;
     }
 
-    public String getAppName() {
-        return appName;
+    public int getPid() {
+        return pid;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     @Override
     public String toString() {
         return "StopApplicationRequest{" +
                 "type=" + type +
-                ", appName='" + appName + '\'' +
+                ", pid=" + pid +
                 '}';
     }
 }

@@ -28,15 +28,13 @@ public class HomeScreenController implements Initializable {
     public Button btnStartProcess;
     public TextField tfPID;
     public Button btnKillProcess;
-    public TableView<WinProcess> tvWinProcess;
 
-    public TableColumn<Object, Object> colNoWinProcess;
-    public TableColumn<WinProcess, String> colImageNameWinProcess;
-    public TableColumn<WinProcess, Integer> colPIDWinProcess;
-    public TableColumn<WinProcess, String> colSessionNameWinProcess;
-    public TableColumn<WinProcess, Integer> colSessionIDWinProcess;
-    public TableColumn<WinProcess, String> colMemUsageWinProcess;
-    public TableColumn<WinProcess, String> colBtnWinProcess;
+    public TableView<WinProcess> tvWinProcess;
+    public TableColumn<Object, Object> colProcessNo;
+    public TableColumn<WinProcess, String> colProcessName;
+    public TableColumn<WinProcess, Integer> colProcessPID;
+    public TableColumn<WinProcess, Double> colProcessMemUsage;
+    public TableColumn<WinProcess, String> colProcessBtn;
 
     // tab app
     public Tab tabWinApp;
@@ -46,12 +44,11 @@ public class HomeScreenController implements Initializable {
     public Button btnStopApp;
 
     public TableView<WinApp> tvWinApp;
-    public TableColumn<Object, Object> colNoWinApp;
-    public TableColumn<WinApp, String> colImageNameWinApp;
-    public TableColumn<WinApp, Integer> colPIDWinApp;
-    public TableColumn<WinApp, String> colMemUsageWinApp;
-    public TableColumn<WinApp, String> colPackageNameWinApp;
-    public TableColumn<WinApp, String> colBtnWinApp;
+    public TableColumn<Object, Object> colAppNo;
+    public TableColumn<WinApp, String> colAppName;
+    public TableColumn<WinApp, Integer> colAppPID;
+    public TableColumn<WinApp, Double> colAppMemUsage;
+    public TableColumn<WinApp, String> colAppBtn;
 
     // tab keystroke
     public Tab tabKeyStroke;
@@ -66,8 +63,6 @@ public class HomeScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        API.connectToServer();
-
         setupTabPane();
         setupTableWinProcess();
         setupTableWinApp();
@@ -87,6 +82,8 @@ public class HomeScreenController implements Initializable {
                         Platform.runLater(this::loadWinProcess);
                     } else if (newTab.equals(tabWinApp)) {
                         System.out.println("switch to tab win app");
+
+                        Platform.runLater(this::loadWinApps);
                     } else if (newTab.equals(tabKeyStroke)) {
                         System.out.println("switch to tab keystroke");
                     } else if (newTab.equals(tabScreenshot)) {
@@ -99,12 +96,10 @@ public class HomeScreenController implements Initializable {
 
     private void setupTableWinProcess() {
         //* setup for table win processes
-        colNoWinProcess.setCellFactory(new LineNumbersCellFactory<>());
-        colImageNameWinProcess.setCellValueFactory(new PropertyValueFactory<>("imageName"));
-        colPIDWinProcess.setCellValueFactory(new PropertyValueFactory<>("pid"));
-        colSessionNameWinProcess.setCellValueFactory(new PropertyValueFactory<>("sessionName"));
-        colSessionIDWinProcess.setCellValueFactory(new PropertyValueFactory<>("sessionId"));
-        colMemUsageWinProcess.setCellValueFactory(new PropertyValueFactory<>("memUsage"));
+        colProcessNo.setCellFactory(new LineNumbersCellFactory<>());
+        colProcessName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colProcessPID.setCellValueFactory(new PropertyValueFactory<>("pid"));
+        colProcessMemUsage.setCellValueFactory(new PropertyValueFactory<>("memUsage"));
 
         //col btn for ```colBtnWinProcess```
         Callback<TableColumn<WinProcess, String>, TableCell<WinProcess, String>> cellFactoryBtnWinProcess = new Callback<>() {
@@ -134,16 +129,15 @@ public class HomeScreenController implements Initializable {
                 };
             }
         };
-        colBtnWinProcess.setCellFactory(cellFactoryBtnWinProcess);
+        colProcessBtn.setCellFactory(cellFactoryBtnWinProcess);
     }
 
     private void setupTableWinApp() {
         //* setup for table win processes
-        colNoWinApp.setCellFactory(new LineNumbersCellFactory<>());
-        colImageNameWinApp.setCellValueFactory(new PropertyValueFactory<>("imageName"));
-        colPIDWinApp.setCellValueFactory(new PropertyValueFactory<>("pid"));
-        colMemUsageWinApp.setCellValueFactory(new PropertyValueFactory<>("memUsage"));
-        colPackageNameWinApp.setCellValueFactory(new PropertyValueFactory<>("packageName"));
+        colAppNo.setCellFactory(new LineNumbersCellFactory<>());
+        colAppName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colAppPID.setCellValueFactory(new PropertyValueFactory<>("pid"));
+        colAppMemUsage.setCellValueFactory(new PropertyValueFactory<>("memUsage"));
 
         //col btn for ```colBtnWinProcess```
         Callback<TableColumn<WinApp, String>, TableCell<WinApp, String>> cellFactoryBtnWinApp = new Callback<>() {
@@ -164,7 +158,7 @@ public class HomeScreenController implements Initializable {
                                 WinApp winApp = getTableView().getItems().get(getIndex());
                                 System.out.println(winApp);
 
-                                stopApp(winApp.getImageName().split("\s+")[0]);
+                                stopApp(winApp.getPid());
                             });
                             setGraphic(btn);
                             setText(null);
@@ -173,7 +167,32 @@ public class HomeScreenController implements Initializable {
                 };
             }
         };
-        colBtnWinApp.setCellFactory(cellFactoryBtnWinApp);
+        colAppBtn.setCellFactory(cellFactoryBtnWinApp);
+    }
+
+    /* ---------- SCREENSHOT START ---------- */
+    private void setupImageView() {
+        ivScreenshotImage.imageProperty().addListener((observableValue, image, t1) -> {
+            System.out.println("ivImage.imageProperty is trigger");
+            Platform.runLater(() -> {
+                Image img = ivScreenshotImage.getImage();
+                if (img != null) {
+                    double w = 0;
+                    double h = 0;
+
+                    double ratioX = ivScreenshotImage.getFitWidth() / img.getWidth();
+                    double ratioY = ivScreenshotImage.getFitHeight() / img.getHeight();
+
+                    double reducCoeff = Math.min(ratioX, ratioY);
+
+                    w = img.getWidth() * reducCoeff;
+                    h = img.getHeight() * reducCoeff;
+
+                    ivScreenshotImage.setX((ivScreenshotImage.getFitWidth() - w) / 2);
+                    ivScreenshotImage.setY((ivScreenshotImage.getFitHeight() - h) / 2);
+                }
+            });
+        });
     }
 
     /* ---------- PROCESS START ---------- */
@@ -229,8 +248,8 @@ public class HomeScreenController implements Initializable {
         }
     }
 
-    private void stopApp(String appName) {
-        if (API.sendReq(new StopApplicationRequest(appName))) {
+    private void stopApp(int pid) {
+        if (API.sendReq(new StopApplicationRequest(pid))) {
             BaseResponse baseRes = API.rcvRes();
             if (baseRes == null || baseRes.getType() != REQUEST_TYPE.STOP_APP) {
                 App.onError("Receive response STOP_APP failed");
@@ -248,13 +267,13 @@ public class HomeScreenController implements Initializable {
             App.onError("Send STOP_APP failed");
         }
     }
+    /* ---------- PROCESS END ---------- */
 
     public void onBtnStartProcessClick(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnStartProcess) {
             startProcess(tfProcessName.getText());
         }
     }
-    /* ---------- PROCESS END ---------- */
 
     private void startProcess(String processName) {
         if (API.sendReq(new StartProcessRequest(processName))) {
@@ -312,13 +331,15 @@ public class HomeScreenController implements Initializable {
         }
     }
 
+    /* ---------- APPLICATION END ---------- */
+
     public void onBtnStopAppClick(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnStopApp) {
-            stopApp(tfAppNameForStop.getText());
+            stopApp(Integer.parseInt(tfAppNameForStop.getText()));
         }
     }
 
-    /* ---------- APPLICATION END ---------- */
+    /* ---------- KEYSTROKE END ---------- */
 
     /* ---------- KEYSTROKE START ---------- */
     public void onBtnKeyStrokeClick(ActionEvent actionEvent) {
@@ -368,36 +389,8 @@ public class HomeScreenController implements Initializable {
         }
     }
 
-    /* ---------- KEYSTROKE END ---------- */
-
-
-    /* ---------- SCREENSHOT START ---------- */
-    private void setupImageView(){
-        ivScreenshotImage.imageProperty().addListener((observableValue, image, t1) -> {
-            System.out.println("ivImage.imageProperty is trigger");
-            Platform.runLater(() -> {
-                Image img = ivScreenshotImage.getImage();
-                if (img != null) {
-                    double w = 0;
-                    double h = 0;
-
-                    double ratioX = ivScreenshotImage.getFitWidth() / img.getWidth();
-                    double ratioY = ivScreenshotImage.getFitHeight() / img.getHeight();
-
-                    double reducCoeff = Math.min(ratioX, ratioY);
-
-                    w = img.getWidth() * reducCoeff;
-                    h = img.getHeight() * reducCoeff;
-
-                    ivScreenshotImage.setX((ivScreenshotImage.getFitWidth() - w) / 2);
-                    ivScreenshotImage.setY((ivScreenshotImage.getFitHeight() - h) / 2);
-                }
-            });
-        });
-    }
-
-    public void onBtnTakeScreenshotClick(ActionEvent actionEvent){
-        if (actionEvent.getSource() == btnTakeScreenshot){
+    public void onBtnTakeScreenshotClick(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == btnTakeScreenshot) {
             if (API.sendReq(new Request(REQUEST_TYPE.TAKE_SCREENSHOT))) {
                 BaseResponse baseRes = API.rcvRes();
                 if (baseRes == null || baseRes.getType() != REQUEST_TYPE.TAKE_SCREENSHOT) {
