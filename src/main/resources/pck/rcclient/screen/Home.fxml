@@ -97,7 +97,7 @@
                         <Tooltip text="Start listen key press" />
                     </tooltip>
                 </Button>
-                <Label fx:id="lblHookNoti" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" text="App is now hooking !!!" textFill="RED">
+                <Label fx:id="lblHookNoti" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="10.0" prefHeight="30.0" prefWidth="300.0" text="App is now hooking !!!" textFill="RED" visible="false">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
@@ -112,10 +112,12 @@
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
-                    <tooltip>
-                        <Tooltip text="Start listen key press" />
-                    </tooltip>
                 </Button>
+            <Button fx:id="btnDownload" layoutX="190.0" layoutY="10.0" mnemonicParsing="false" onAction="#onBtnDownloadClick" prefHeight="30.0" prefWidth="150.0" text="Download">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
                 <Pane layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="760.0">
                     <ImageView fx:id="ivScreenshotImage" fitHeight="400.0" fitWidth="760.0" pickOnBounds="true" preserveRatio="true" />
                 </Pane>

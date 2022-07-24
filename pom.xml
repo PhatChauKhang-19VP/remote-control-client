@@ -6,7 +6,7 @@
 
     <groupId>pck</groupId>
     <artifactId>RC-client</artifactId>
-    <version>0.1</version>
+    <version>1.0</version>
     <name>RC-client</name>
 
     <properties>
@@ -25,7 +25,6 @@
             <artifactId>javafx-fxml</artifactId>
             <version>18.0.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -42,6 +41,29 @@
             <groupId>io.github.typhon0</groupId>
             <artifactId>AnimateFX</artifactId>
             <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>18</version>
+            <classifier>win</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>18</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>18</version>
+            <classifier>mac</classifier>
         </dependency>
     </dependencies>
 

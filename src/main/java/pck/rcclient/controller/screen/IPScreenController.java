@@ -27,10 +27,10 @@ public class IPScreenController implements Initializable {
     public ImageView ivIPIcon;
 
     protected
-    String successMessage = String.format("-fx-text-fill: GREEN;");
-    String errorMessage = String.format("-fx-text-fill: RED;");
-    String errorStyle = String.format("-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;");
-    String successStyle = String.format("-fx-border-color: #A9A9A9; -fx-border-width: 2; -fx-border-radius: 5;");
+    String successMessage = "-fx-text-fill: GREEN;";
+    String errorMessage = "-fx-text-fill: RED;";
+    String errorStyle = "-fx-border-color: RED; -fx-border-width: 2; -fx-border-radius: 5;";
+    String successStyle = "-fx-border-color: #A9A9A9; -fx-border-width: 2; -fx-border-radius: 5;";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,7 +63,7 @@ public class IPScreenController implements Initializable {
     public boolean checkIPValid(String ip) {
         if (ip.isBlank()) {
             ipField.setStyle(errorStyle);
-            ipWarningField.setText("Vui lòng nhập địa chỉ IP!");
+            ipWarningField.setText("Please enter IP!");
             ipWarningField.setStyle(errorMessage);
 
             return false;
@@ -73,7 +73,7 @@ public class IPScreenController implements Initializable {
 
         if (!ip.matches(regex)) {
             ipField.setStyle(errorStyle);
-            ipWarningField.setText("Địa chỉ IP có dạng: (0-255).(0-255).(0.255).(0-255) !");
+            ipWarningField.setText("IP must match format (0-255).(0-255).(0.255).(0-255) !");
             ipWarningField.setStyle(errorMessage);
 
             return false;
@@ -89,7 +89,7 @@ public class IPScreenController implements Initializable {
     public boolean checkPortValid(String port) {
         if (port.isBlank()) {
             portField.setStyle(errorStyle);
-            portWarningField.setText("Vui lòng nhập số cổng!");
+            portWarningField.setText("Please enter port number !");
             portWarningField.setStyle(errorMessage);
 
             return false;
@@ -99,7 +99,7 @@ public class IPScreenController implements Initializable {
 
         if (!port.matches(regex)) {
             portField.setStyle(errorStyle);
-            portWarningField.setText("Số cổng chỉ bao gồm các kí tự từ 0-9 và nằm trong khoảng 0 - 65535!");
+            portWarningField.setText("Port must only contain 0-9 and in range from 0 to 65535 !");
             portWarningField.setStyle(errorMessage);
 
             return false;
@@ -121,7 +121,7 @@ public class IPScreenController implements Initializable {
                     App.gotoHomeScreen();
                 } else {
                     statusAlert.setStyle(errorStyle);
-                    statusAlert.setText("Không thể kế nối đến server !");
+                    statusAlert.setText("Cannot connect to Server !");
                     statusAlert.setStyle(errorMessage);
                     statusAlert.setVisible(true);
                     if (!checkIPValid("")) {
@@ -131,7 +131,7 @@ public class IPScreenController implements Initializable {
                     if (!checkPortValid("")) {
                         new animatefx.animation.Shake(portField).play();
                     }
-                    System.out.println("Ket noi ko thanh cong den server");
+                    System.out.println("Cannot connect to Server !");
                 }
             }
         }

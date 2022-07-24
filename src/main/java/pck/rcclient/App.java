@@ -38,7 +38,9 @@ public class App extends Application {
 
         Scene scene = new Scene(page, width, height);
         stage.setScene(scene);
-
+        stage.setTitle("Remote control client");
+        stage.getIcons().clear();
+        stage.getIcons().add(new Image("static/images/PCK-logo.png"));
         stage.sizeToScene();
         stage.show();
         return page;
