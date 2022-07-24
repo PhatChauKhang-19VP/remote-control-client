@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+
 import pck.rcclient.App;
 import pck.rcclient.api.API;
 import pck.rcclient.be.model.Server;
@@ -115,6 +116,7 @@ public class IPScreenController implements Initializable {
         portWarningField.setStyle(successMessage);
 
         portWarningField.setWrappingWidth(250);
+
         return true;
     }
 
