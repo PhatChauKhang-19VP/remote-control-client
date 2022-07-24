@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import pck.rcclient.App;
 import pck.rcclient.api.API;
 import pck.rcclient.be.model.Server;
@@ -16,10 +17,10 @@ import java.util.ResourceBundle;
 
 public class IPScreenController implements Initializable {
     public TextField ipField;
-    public Label ipWarningField;
+    public Text ipWarningField;
 
     public TextField portField;
-    public Label portWarningField;
+    public Text portWarningField;
 
     public Button connectButton;
     public Label statusAlert;
@@ -58,6 +59,9 @@ public class IPScreenController implements Initializable {
                 statusAlert.setVisible(false);
             }
         });
+
+        ipWarningField.setWrappingWidth(250);
+        portWarningField.setWrappingWidth(250);
     }
 
     public boolean checkIPValid(String ip) {
@@ -83,6 +87,7 @@ public class IPScreenController implements Initializable {
         ipWarningField.setText("");
         ipWarningField.setStyle(successMessage);
 
+        ipWarningField.setWrappingWidth(250);
         return true;
     }
 
@@ -109,6 +114,7 @@ public class IPScreenController implements Initializable {
         portWarningField.setText("");
         portWarningField.setStyle(successMessage);
 
+        portWarningField.setWrappingWidth(250);
         return true;
     }
 

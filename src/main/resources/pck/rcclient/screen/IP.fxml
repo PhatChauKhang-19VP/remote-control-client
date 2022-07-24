@@ -9,11 +9,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: FFFBE3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pck.rcclient.controller.screen.IPScreenController">
-     <Label alignment="CENTER" contentDisplay="CENTER" layoutY="50.0" prefWidth="600.0" style="-fx-font-size: 48; -fx-font-weight: 700;" text="E-Note Client" textAlignment="CENTER">
+     <Label alignment="CENTER" contentDisplay="CENTER" layoutY="50.0" prefWidth="600.0" style="-fx-font-size: 48; -fx-font-weight: 700;" text="Remote Control Client" textAlignment="CENTER">
       <font>
-         <Font name="System Bold" size="48.0" />
+         <Font name="Arial Bold" size="48.0" />
       </font>
    </Label>
     <Pane layoutX="100.0" layoutY="70.0" prefHeight="465.0" prefWidth="400.0">
@@ -37,7 +38,10 @@
                         <Font size="16.0" />
                     </font>
                 </TextField>
-                <Label fx:id="ipWarningField" layoutX="28.0" layoutY="83.0" style="-fx-font-size: 16;" />
+                <Text fx:id="ipWarningField" fill="RED" layoutX="30.0" layoutY="90.0" style="-fx-font-size: 16;">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
             </Pane>
             <Pane layoutY="200.0" prefHeight="110.0" prefWidth="300.0">
                 <padding>
@@ -50,21 +54,24 @@
                 <ImageView fx:id="ivPortIcon" fitHeight="35.0" fitWidth="35.0" layoutX="25.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="https://res.cloudinary.com/pck-group/image/upload/v1655628901/MMT/enote/images/ethernet_scvhsm.png" />
                 </ImageView>
-                <Label fx:id="portWarningField" layoutX="25.0" layoutY="83.0" prefWidth="250.0" style="-fx-font-size: 16;" />
+                <Text fx:id="portWarningField" fill="RED" layoutX="30" layoutY="90">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Text>
                 <TextField fx:id="portField" layoutX="65.0" layoutY="40.0" maxWidth="210.0" prefHeight="32.0" prefWidth="210.0" promptText="Enter Server's Port">
                     <font>
-                        <Font size="16.0" />
+                        <Font size="14.0" />
                     </font>
                 </TextField>
             </Pane>
-            <Button fx:id="connectButton" layoutX="50.0" layoutY="325.0" mnemonicParsing="false" onAction="#onConnectButtonClicked" prefWidth="200.0" text="Create Conntection">
+            <Button fx:id="connectButton" layoutX="50.0" layoutY="325.0" mnemonicParsing="false" onAction="#onConnectButtonClicked" prefHeight="40.0" prefWidth="200.0" text="Create Conntection">
                 <font>
-                    <Font size="20.0" />
+                    <Font name="Arial" size="16.0" />
                 </font>
             </Button>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" prefWidth="300.0" text="Connection properties" textAlignment="CENTER">
                 <font>
-                    <Font name="System Bold" size="26.0" />
+                    <Font name="Arial Bold" size="24.0" />
                 </font>
             </Label>
             <Label fx:id="statusAlert" alignment="CENTER" contentDisplay="CENTER" layoutY="295.0" prefHeight="30.0" prefWidth="300.0" textAlignment="CENTER">
