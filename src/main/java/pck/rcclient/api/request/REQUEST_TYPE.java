@@ -1,0 +1,15 @@
+package pck.rcclient.api.request;
+
+public enum REQUEST_TYPE {
+    TEST_CONNECTION,
+    GET_LIST_RUNNING_PROCESS,
+    START_PROCESS,
+    STOP_PROCESS,
+    GET_LIST_RUNNING_APP,
+    START_APP,
+    STOP_APP,
+    TAKE_SCREENSHOT,
+    KEYSTROKE_HOOK,
+    KEYSTROKE_UNHOOK,
+    SHUTDOWN
+}
