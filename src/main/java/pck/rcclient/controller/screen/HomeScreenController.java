@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HomeScreenController implements Initializable {
@@ -33,6 +34,7 @@ public class HomeScreenController implements Initializable {
     public Button btnStartProcess;
     public TextField tfPID;
     public Button btnKillProcess;
+    public Button btnShutdown;
 
     public TableView<WinProcess> tvWinProcess;
     public TableColumn<Object, Object> colProcessNo;
@@ -206,6 +208,38 @@ public class HomeScreenController implements Initializable {
                 stopProcess(Integer.parseInt(tfPID.getText()));
             } catch (NumberFormatException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    public void onBtnShutdownClick(ActionEvent actionEvent) {
+        if(actionEvent.getSource() == btnShutdown) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cảnh báo!");
+            alert.setHeaderText("Tắt máy tính");
+            alert.setContentText("Bạn có chắc muốn tắt máy tính phía remote?");
+
+            // option != null.
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if (option.get() == ButtonType.OK) {
+                if (API.sendReq(new Request(REQUEST_TYPE.SHUTDOWN))) {
+                    BaseResponse baseRes = API.rcvRes();
+                    System.out.println(baseRes);
+                    if (baseRes == null || baseRes.getType() != REQUEST_TYPE.SHUTDOWN) {
+                        App.onError("Receive response SHUTDOWN failed");
+                    } else {
+                        Response res = (Response) baseRes;
+
+                        if (res.getStatus() == RESPONSE_STATUS.SUCCESS) {
+                            App.onNoti(res.getMsg());
+                        } else {
+                            App.onError(res.getMsg());
+                        }
+                    }
+                } else {
+                    App.onError("Send SHUTDOWN failed");
+                }
             }
         }
     }
